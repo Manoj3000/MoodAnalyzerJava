@@ -1,5 +1,8 @@
 package com.bridgelabz.moodanalyzer;
 
+import com.bridgelabz.exception.ErrorMessages;
+import com.bridgelabz.exception.MoodAnalysisException;
+
 public class MoodAnalyzer {
 
 	private String message;
@@ -10,14 +13,19 @@ public class MoodAnalyzer {
 		this.message = message;
 	}
 
-	public String analyseMood() {
+	public String analyseMood() throws MoodAnalysisException {
+		
+		if(message.trim().isEmpty()) {
+			throw new MoodAnalysisException(ErrorMessages.INVALID_DATA.get());			
+		}
+		
 		try {
 			if (message.toLowerCase().indexOf("sad") != -1)
 				return "SAD";
 			else
 				return "HAPPY";
 		} catch (NullPointerException e) {
-			return "HAPPY";
+			throw new MoodAnalysisException(ErrorMessages.INVALID_DATA.get());
 		}
 	}
 
