@@ -11,10 +11,14 @@ public class MoodAnalyzer {
 	}
 
 	public String analyseMood() {
-		if (message.toLowerCase().indexOf("sad") != -1)
-			return "SAD";
-		else
+		try {
+			if (message.toLowerCase().indexOf("sad") != -1)
+				return "SAD";
+			else
+				return "HAPPY";
+		} catch (NullPointerException e) {
 			return "HAPPY";
+		}
 	}
 
 	public static void main(String[] args) {
